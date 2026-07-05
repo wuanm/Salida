@@ -1,0 +1,19 @@
+{
+  "name": "enfermera-app",
+  "version": "1.0.0",
+  "description": "App de prueba para enfermera ❤️",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/app.js",
+    "start": "node src/app.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.110.0",
+    "archiver": "^8.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-fileupload": "^1.5.2"
+  }
+}

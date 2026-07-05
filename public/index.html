@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="theme-color" content="#0a1628" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>Cumple de Martha 🩺 — Mis recuerdos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/estilos.css" />
+</head>
+<body>
+
+  <div class="ocean-bg" aria-hidden="true">
+    <div class="wave wave-1"></div>
+    <div class="wave wave-2"></div>
+    <div class="wave wave-3"></div>
+    <div class="bubbles" id="bubbles"></div>
+  </div>
+
+  <header class="site-header glass-panel">
+    <div class="header-inner">
+      <div class="header-title-group">
+        <span class="header-eyebrow">Cumpleañera 46 años</span>
+        <h1 class="header-name">Martha Alicia Ortiz Jaramillo</h1>
+        <span class="header-subtitle">Recuerdos Interactivos</span>
+      </div>
+      <div class="header-deco" aria-hidden="true">🩺</div>
+    </div>
+
+    <div class="admin-badge" id="adminBadge" hidden>
+      <span>💊</span> Modo Administrador
+    </div>
+  </header>
+
+  <main class="main-content">
+
+    <section class="selector-section glass-panel" id="selectorAccion">
+      <h2 class="section-title"><span class="section-icon">✦</span> Comparte tu momento</h2>
+      <p class="section-desc">¿Qué te gustaría hacer el día de hoy? 💊</p>
+      
+      <div class="selector-buttons-group">
+        <button type="button" class="btn-menu" id="btnIrAFotos">
+          <span class="btn-menu-icon">📸</span> Tomar/Subir Foto
+        </button>
+        <button type="button" class="btn-menu" id="btnIrAMensajes">
+          <span class="btn-menu-icon">✍️</span> Dejar Dedicatoria
+        </button>
+      </div>
+    </section>
+
+
+    <!-- foto -->
+    <section class="form-section glass-panel" id="formFotos" hidden>
+      <button type="button" class="btn-regresar" aria-label="Volver al menú anterior">← Volver al menú</button>
+      
+      <h2 class="section-title"><span class="section-icon">✨</span> Captura el momento</h2>
+      <p class="section-desc">Tu foto irá directo a la galería de fotos de urgencia</p>
+      
+      <form id="formSoloFoto" novalidate>
+        <div class="field-group foto-group">
+          <label class="foto-btn" for="inputFoto" id="fotoLabel">
+            <span class="foto-icon">📸</span>
+            <span class="foto-text" id="fotoTexto">Abrir Cámara de Celular</span>
+          </label>
+          <input
+            type="file"
+            id="inputFoto"
+            name="foto"
+            accept="image/*"
+            capture="environment"
+            class="foto-input-hidden"
+            required
+          />
+
+          <div class="foto-preview" id="previewFoto" hidden>
+            <img src="" alt="Vista previa de tu foto" id="imgPreviewFoto" />
+            <button type="button" class="foto-remove" id="fotoRemove" aria-label="Quitar foto">✕</button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-enviar" id="btnEnviarFoto">
+          <span class="btn-text">Publicar Foto 💊</span>
+          <span class="btn-loading" hidden><span class="spinner"></span> Enviando foto…</span>
+        </button>
+      </form>
+    </section>
+
+    <!-- final fotos -->
+
+
+    <!-- Mensaje -->
+    <section class="form-section glass-panel" id="formMensajes" hidden>
+      <button type="button" class="btn-regresar" aria-label="Volver al menú anterior">← Volver al menú</button>
+      
+      <h2 class="section-title"><span class="section-icon">✉️</span> Libro de Visitas</h2>
+      <p class="section-desc">Escribe tus mejores deseos y felicitaciones para Grietell</p>
+
+      <form id="formSoloMensaje" novalidate>
+        <div class="field-group">
+          <label class="field-label" for="nombreMensaje">Tu nombre</label>
+          <input
+            type="text"
+            id="nombreMensaje"
+            name="nombre"
+            class="field-input"
+            placeholder="Ej: Primo Emmanuel"
+            maxlength="80"
+            required
+          />
+          <span class="field-error" id="errorNombreMensaje" role="alert"></span>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="inputTextoMensaje">Tu dedicatoria</label>
+          <textarea
+            id="inputTextoMensaje"
+            name="mensaje"
+            class="field-textarea"
+            placeholder="Escribe algo lindo desde el corazón..."
+            maxlength="600"
+            rows="4"
+            required
+          ></textarea>
+          <div class="char-count"><span id="charCount">0</span> / 600</div>
+          <span class="field-error" id="errorTextoMensaje" role="alert"></span>
+        </div>
+
+        <button type="submit" class="btn-enviar" id="btnEnviarMensaje">
+          <span class="btn-text">Enviar Mensaje 💊</span>
+          <span class="btn-loading" hidden><span class="spinner"></span> Guardando dedicatoria…</span>
+        </button>
+      </form>
+    </section>
+    <!-- final mensajes -->
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <!-- -fotos ----------------------------------------------------------------------- -->
+
+    <section class="album-container" id="areaFotos" aria-label="Galería de Fotos" hidden>
+      <div class="album-meta-header">
+        <span class="post-count" id="photoCount"></span>
+        <button class="btn-admin btn-zip" id="btnAlbumZip" hidden aria-label="Descargar todas las fotos" >
+          ⬇ Descargar Álbum Completo (.Zip)
+        </button>
+      </div>
+
+      <div class="fotos-grid" id="fotosGrid" role="list"></div>
+      
+      <div class="galeria-empty" id="fotosEmpty" hidden>
+        <span class="empty-icon">💉</span>
+        <p>Aún no hay fotos en el océano.<br>¡Sé el primero en capturar un instante!</p>
+      </div>
+
+      <div class="paginacion-container" id="paginacionContenedorFotos">
+        <button type="button" id="btnCargarMasFotos" class="btn-cargar-mas" hidden>
+          Ver más fotos 🔽
+        </button>
+      </div>
+    </section>
+      <!--  mensajes actualizados -->
+    <section class="album-container" id="areaMensajes" aria-label="Libro de Mensajes" hidden>
+      <div class="album-meta-header">
+        <span class="post-count" id="messageCount"></span>
+      </div>
+
+      <div class="mensajes-layout" id="mensajesLayout" role="list"></div>
+
+      <div class="galeria-empty" id="mensajesEmpty" hidden>
+        <span class="empty-icon">💉</span>
+        <p>El libro de visitas está en la sala de espera.<br>¡Escribe las primeras palabras!</p>
+      </div>
+
+      <div class="paginacion-container" id="paginacionContenedor">
+        <button type="button" id="btnCargarMas" class="btn-cargar-mas">
+          Ver más mensajes 🔽
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Con amor para <em>Martha Ortiz</em> 💉 · Cumpleaños Feliz</p>
+  </footer>
+
+  <template id="templateFoto">
+    <div class="foto-card-item" role="listitem">
+      <img class="foto-thumbnail" alt="Fotografía compartida por un invitado" loading="lazy" />
+      <span class="foto-autor-tag"></span>
+      <button class="btn-admin btn-delete-file" hidden aria-label="Eliminar fotografía">🗑️</button>
+    </div>
+  </template>
+
+  <template id="templateMensaje">
+    <article class="message-card glass-card" role="listitem" style="border: 1px solid black;">
+      <div class="message-header">
+        <div class="message-avatar">💉</div>
+        <div class="message-meta">
+          <strong class="message-author"></strong>
+          <time class="message-time"></time>
+        </div>
+      </div>
+      <p class="message-text"></p>
+      <button class="btn-admin btn-delete-text" hidden aria-label="Eliminar dedicatoria">🗑 Eliminar Mensaje</button>
+    </article>
+  </template>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
