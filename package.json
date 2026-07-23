@@ -2,12 +2,13 @@
   "name": "Mazatlan2026",
   "version": "1.0.0",
   "description": "Vacaciones de los Ortiz",
-  "main": "index.js",
+  "main": "src/app.js",
   "type": "module",
-  "scripts": {
-    "dev": "node --watch src/app.js",
-    "start": "node server.js"
-  },
+ 
+    "scripts": {
+        "dev": "node --watch src/app.js",
+        "start": "node src/app.js"
+    },
   "dependencies": {
     "@supabase/supabase-js": "^2.110.0",
     "archiver": "^8.0.0",
